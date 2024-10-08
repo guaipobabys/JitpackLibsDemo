@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -41,24 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-val group = "com.pobaby.sdk"
-val artifactId = "test_support"
-val version = "1.0.0"
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            create<MavenPublication>("release") {
-                // Applies the component for the release build variant.\
-                // from(components["release"])
-                // You can then customize attributes of the publication as shown below.
-                groupId = (group.toString())
-                artifactId = artifactId
-                version = version
-            }
-        }
-    }
 }
