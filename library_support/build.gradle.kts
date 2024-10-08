@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
+    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -43,15 +43,21 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
+val group = "com.pobaby.sdk"
+val artifactId = "test_support"
+val version = "1.0.0"
+
 afterEvaluate {
     publishing {
         publications {
-            register<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.pobaby.sdk"      // 表示发布 release（jitpack 都不会使用到）
-                artifactId = "test_support"   // 依赖库的名称（jitpack 都不会使用到）
-                version = "1.0.0"       // 例如 1.0.0
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                // Applies the component for the release build variant.\
+                // from(components["release"])
+                // You can then customize attributes of the publication as shown below.
+                groupId = (group.toString())
+                artifactId = artifactId
+                version = version
             }
         }
     }
